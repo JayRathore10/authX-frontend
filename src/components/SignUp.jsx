@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import "./SignUp.css";
 
-export function SignUp(){
+export function SignUp({setUserData}){
 
   const [name , setName] = useState("");
   const [password , setPassword] = useState("");
@@ -21,8 +21,8 @@ export function SignUp(){
         password  , 
         email , 
         age 
-      });
-      console.log(response.data);
+      } , {withCredentials : true});
+      setUserData(response.data.user);
       navigate("/profile")
     }catch(err){
       console.log(err);

@@ -28,7 +28,8 @@ function App() {
     <>  
       <BrowserRouter>
         <Routes>
-          <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/signup' element={<SignUp setUserData={setUserData} />} 
+          />
           <Route path="/login" element={<LogIn setUserData={setUserData} />}/>
           <Route path="/otp-verification" element={<OtpVer />} />
           <Route path="/reset-password" element={<ResetPassword />}/>

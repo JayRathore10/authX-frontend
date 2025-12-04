@@ -15,7 +15,7 @@ export function LogIn({setUserData}){
       const response = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/login" ,{
         email , 
         password 
-      })
+      } , {withCredentials : true })
       setUserData(response.data.user);
       navigate("/profile");
     }catch(err){
