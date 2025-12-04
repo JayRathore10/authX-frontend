@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { SignUp } from './components/SignUp';
 import { LogIn } from './components/LogIn';
@@ -10,7 +10,6 @@ import { ProfilePage } from './components/ProfilePage';
 import './App.css';
 
 function App() {
-
   useEffect(()=>{
     const awakeBackend = async()=>{
       try{
@@ -23,16 +22,18 @@ function App() {
     awakeBackend();
   } , []);
 
+  const [userData, setUserData] = useState({}); 
+
   return (
     <>  
       <BrowserRouter>
         <Routes>
           <Route path='/signup' element={<SignUp/>}/>
-          <Route path="/login" element={<LogIn/>}/>
+          <Route path="/login" element={<LogIn setUserData={setUserData} />}/>
           <Route path="/otp-verification" element={<OtpVer />} />
           <Route path="/reset-password" element={<ResetPassword />}/>
           <Route path="/forget-password" element={<ForgetPassword />}/>
-          <Route path="/profile" element={<ProfilePage/>}/>
+          <Route path="/profile" element={<ProfilePage userData={userData} />}/>
         </Routes>
       </BrowserRouter>
     </>

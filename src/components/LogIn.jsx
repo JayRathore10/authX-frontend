@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import axios from 'axios';
 
-export function LogIn(){
+export function LogIn({setUserData}){
   const navigate = useNavigate();
 
   const[email , setEmail] = useState("");
@@ -16,7 +16,7 @@ export function LogIn(){
         email , 
         password 
       })
-      console.log(response.data);
+      setUserData(response.data.user);
       navigate("/profile");
     }catch(err){
       console.log(err);
