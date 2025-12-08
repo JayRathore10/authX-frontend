@@ -23,15 +23,36 @@ function App() {
   } , []);
 
   const [userData, setUserData] = useState({}); 
+  const [name , setName] = useState("");
+  const [password , setPassword] = useState("");
+  const [email , setEmail] = useState("");
+  const [age , setAge] = useState(0); 
 
   return (
     <>  
       <BrowserRouter>
         <Routes>
-          <Route path='/signup' element={<SignUp setUserData={setUserData} />} 
+          <Route path='/signup' element={<SignUp 
+            setName={setName} name = {name}
+            setPassword={setPassword} password = {password}
+            setEmail = {setEmail} 
+            setAge = {setAge} age = {age}
+            email={email}
+          />} 
           />
-          <Route path="/login" element={<LogIn setUserData={setUserData} />}/>
-          <Route path="/otp-verification" element={<OtpVer />} />
+          <Route path="/login" element={<LogIn setUserData={setUserData}
+            setName={setName} 
+            setPassword={setPassword}
+            setEmail = {setEmail}
+            setAge = {setAge}
+          />}/>
+          <Route path="/otp-verification" element={<OtpVer 
+            name = {name}
+            age = {age}
+            password ={password}
+            email = {email}
+            setUserData = {setUserData}
+          />} />
           <Route path="/reset-password" element={<ResetPassword />}/>
           <Route path="/forget-password" element={<ForgetPassword />}/>
           <Route path="/profile" element={<ProfilePage userData={userData} />}/>

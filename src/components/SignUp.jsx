@@ -1,29 +1,31 @@
-import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 import "./SignUp.css";
 
-export function SignUp({setUserData}){
-
-  const [name , setName] = useState("");
-  const [password , setPassword] = useState("");
-  const [email , setEmail] = useState("");
-  const [age , setAge] = useState(0); 
-
+export function SignUp({setAge , setEmail , setName  , email , setPassword , name , age , password}){
   const navigate = useNavigate();
 
   const submitHandler = async(e)=>{
     try{
       e.preventDefault();
-      const response = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/sign-up" , {
-        name , 
-        password  , 
-        email , 
-        age 
-      } , {withCredentials : true});
-      setUserData(response.data.user);
-      navigate("/profile")
+      
+      const isExist = await axios.post("http://localhost:3000/api/auth/user-exist" , {
+        email, 
+        age , 
+        password , 
+        name 
+      });
+      
+      if(isExist.data.exist === false ){
+        navigate("/otp-verification");
+        const  response  = await axios.post("http://localhost:3000/api/auth/otp-generator" , {
+          email 
+        })
+        console.log(response.data);
+      }else{
+        console.log("User Exist");
+      }
+      
     }catch(err){
       console.log(err);
     }
