@@ -1,0 +1,35 @@
+.otp-container {
+width: 360px;
+margin: 50px auto;
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+text-align: center;
+font-family: Arial, sans-serif;
+background-color: #fff;
+}
+
+.otp-form input {
+width: 100%;
+padding: 12px;
+margin: 10px 0;
+border-radius: 6px;
+border: 1px solid #ccc;
+font-size: 14px;
+}
+
+.otp-form button {
+width: 100%;
+padding: 12px;
+margin-top: 15px;
+border: none;
+border-radius: 6px;
+background-color: #4CAF50;
+color: white;
+font-size: 16px;
+cursor: pointer;
+}
+
+.otp-form button:hover {
+background-color: #45a049;
+}

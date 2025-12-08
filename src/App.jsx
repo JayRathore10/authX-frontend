@@ -8,6 +8,7 @@ import { ForgetPassword } from './components/ForgetPassword';
 import { BrowserRouter , Route , Routes } from 'react-router-dom';
 import { ProfilePage } from './components/ProfilePage';
 import './App.css';
+import { ResetOtp } from './components/ResetOtp';
 
 function App() {
   useEffect(()=>{
@@ -32,7 +33,7 @@ function App() {
     <>  
       <BrowserRouter>
         <Routes>
-          <Route path='/signup' element={<SignUp 
+          <Route path='/' element={<SignUp 
             setName={setName} name = {name}
             setPassword={setPassword} password = {password}
             setEmail = {setEmail} 
@@ -53,9 +54,15 @@ function App() {
             email = {email}
             setUserData = {setUserData}
           />} />
+          <Route path="/forget-password" element={<ForgetPassword 
+            email={email}
+            setEmail={setEmail}
+            />}/>
           <Route path="/reset-password" element={<ResetPassword />}/>
-          <Route path="/forget-password" element={<ForgetPassword />}/>
           <Route path="/profile" element={<ProfilePage userData={userData} />}/>
+          <Route path="/reset-otp" element={<ResetOtp 
+            email={email}
+          />} />
         </Routes>
       </BrowserRouter>
     </>
