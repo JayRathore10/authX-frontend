@@ -1,15 +1,26 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import "./ResetPassword.css";
 
-export function ResetPassword({email , password, setPassword}){
+export function ResetPassword({password, setPassword , otp , setUserData}){
   const [confirmPass , setConfirmPass] = useState("");
+
+  const navigate = useNavigate();
 
   const submitHandler = async(e)=>{
     try{  
       e.preventDefault();
-      const response = await axios.post();
-      // have to make a call that reset the old password with newOne
+      if(password !== confirmPass){
+        console.error("Password not match");
+        return ;
+      }
+      const response = await axios.post(`http://localhost:3000/api/auth/reset-password/${otp}`, {
+        password : password
+      });
+      console.log(response.data.meesage);
+      setUserData(response.data.userData);
+      navigate("/profile");
     }catch(err){
       console.log(err);
     }

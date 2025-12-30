@@ -28,6 +28,7 @@ function App() {
   const [password , setPassword] = useState("");
   const [email , setEmail] = useState("");
   const [age , setAge] = useState(0); 
+  const [otp , setOtp] = useState("");
 
   return (
     <>  
@@ -58,10 +59,17 @@ function App() {
             email={email}
             setEmail={setEmail}
             />}/>
-          <Route path="/reset-password" element={<ResetPassword />}/>
+          <Route path="/reset-password" element={<ResetPassword 
+            password={password}
+            setPassword={setPassword}
+            setUserData = {setUserData}
+            otp={otp}
+          />}/>
           <Route path="/profile" element={<ProfilePage userData={userData} />}/>
           <Route path="/reset-otp" element={<ResetOtp 
             email={email}
+            otp={otp}
+            setOtp={setOtp}
           />} />
         </Routes>
       </BrowserRouter>

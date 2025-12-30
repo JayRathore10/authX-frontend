@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "./ResetOtp.css";
 
-export function ResetOtp(){
-  
-  const [otp , setOtp] = useState("");
+export function ResetOtp({otp , setOtp}){
 
   const navigate = useNavigate();
 
