@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target : "https://authx-backend-yyep.onrender.com" ,  // your backend
+        target : "https://authx-backend-yyep.onrender.com" ,  
         changeOrigin: true,
         secure: false
       }
