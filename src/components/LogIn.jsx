@@ -12,7 +12,7 @@ export function LogIn({setUserData}){
   const submitHandler = async(e)=>{
     try{
       e.preventDefault();
-      const response = await axios.post("http://localhost:3000/api/auth/login" ,{
+      const response = await axios.post("/api/auth/login" ,{
         email , 
         password 
       } , {withCredentials : true })

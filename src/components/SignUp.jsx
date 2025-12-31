@@ -9,7 +9,7 @@ export function SignUp({setAge , setEmail , setName  , email , setPassword , nam
     try{
       e.preventDefault();
       
-      const isExist = await axios.post("http://localhost:3000/api/auth/user-exist" , {
+      const isExist = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/user-exist" , {
         email, 
         age , 
         password , 
@@ -18,7 +18,7 @@ export function SignUp({setAge , setEmail , setName  , email , setPassword , nam
       
       if(isExist.data.exist === false ){
         navigate("/otp-verification");
-        const  response  = await axios.post("http://localhost:3000/api/auth/otp-generator" , {
+        const  response  = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/otp-generator" , {
           email 
         })
         console.log(response.data);

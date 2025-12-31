@@ -9,7 +9,7 @@ export function ResetOtp({otp , setOtp}){
   const submitHandler = async(e)=>{
     try{
       e.preventDefault();
-      const response = await axios.get(`http://localhost:3000/api/auth/reset-password/${otp}` , {withCredentials : true});
+      const response = await axios.get(`/api/auth/reset-password/${otp}` , {withCredentials : true});
       if(response.status === 200){
         console.log(response.data);
         navigate("/reset-password");

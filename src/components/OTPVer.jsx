@@ -12,7 +12,7 @@ export function OtpVer({name , age , email , password ,setUserData}){
   const submitHandler = async(e)=>{
     try{
       e.preventDefault();
-      const response = await axios.post("http://localhost:3000/api/auth/sign-up" , {
+      const response = await axios.post("/api/auth/sign-up" , {
         name , 
         password  , 
         email , 
