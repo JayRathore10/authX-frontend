@@ -19,8 +19,14 @@ export function OtpVer({name , age , email , password ,setUserData}){
         age , 
         otp 
       } , {withCredentials : true});
-      setUserData(response.data.user);
-      navigate("/profile");
+
+      if(response.status === 200){
+        setUserData(response.data.user);
+        navigate("/profile");
+      }else{
+        alert("Something went wrong");
+      }
+
     }catch(err){
       console.log(err);
     }

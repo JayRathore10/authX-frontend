@@ -21,7 +21,13 @@ export function SignUp({setAge , setEmail , setName  , email , setPassword , nam
         const  response  = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/otp-generator" , {
           email 
         })
-        console.log(response.data);
+        
+        if(response.status === 200){
+          console.log(response.data);
+        }else{
+          alert("Something Went Wrong");
+        }
+
       }else{
         console.log("User Exist");
       }

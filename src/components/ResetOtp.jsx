@@ -14,7 +14,7 @@ export function ResetOtp({otp , setOtp}){
         console.log(response.data);
         navigate("/reset-password");
       }else{
-        console.log('error');
+        alert("Somthing Went Wrong");
       }
     }catch(err){
       console.log(err);

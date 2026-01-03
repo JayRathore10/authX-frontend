@@ -18,9 +18,13 @@ export function ResetPassword({password, setPassword , otp , setUserData}){
       const response = await axios.post(`https://authx-backend-yyep.onrender.com/api/auth/reset-password/${otp}`, {
         password : password
       });
-      console.log(response.data.meesage);
-      setUserData(response.data.userData);
-      navigate("/profile");
+
+      if(response.status === 200){
+        setUserData(response.data.userData);
+        navigate("/profile");
+      }else{
+        alert("Something Went Wrong");
+      }
     }catch(err){
       console.log(err);
     }

@@ -16,7 +16,7 @@ export function ForgetPassword({ setEmail, email }) {
         console.log(response.data);
         navigate("/reset-otp")
       } else {
-        console.log('error');
+        alert("Someting went Wrong Try again");
       }
     } catch (err) {
       console.log(err);
