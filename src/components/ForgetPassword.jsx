@@ -9,7 +9,7 @@ export function ForgetPassword({ setEmail, email }) {
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.post("/api/auth/forget-password", {
+      const response = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/forget-password", {
         email
       });
       if (response.status === 200) {

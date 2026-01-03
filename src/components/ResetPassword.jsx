@@ -15,7 +15,7 @@ export function ResetPassword({password, setPassword , otp , setUserData}){
         console.error("Password not match");
         return ;
       }
-      const response = await axios.post(`/api/auth/reset-password/${otp}`, {
+      const response = await axios.post(`https://authx-backend-yyep.onrender.com/api/auth/reset-password/${otp}`, {
         password : password
       });
       console.log(response.data.meesage);
