@@ -5,68 +5,72 @@ import { LogIn } from './components/LogIn';
 import { OtpVer } from './components/OTPVer';
 import { ResetPassword } from './components/ResetPassword';
 import { ForgetPassword } from './components/ForgetPassword';
-import { BrowserRouter , Route , Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ProfilePage } from './components/ProfilePage';
 import './App.css';
 import { ResetOtp } from './components/ResetOtp';
 
 function App() {
-  useEffect(()=>{
-    const awakeBackend = async()=>{
-      try{
-        const res =  await axios.get("https://authx-backend-yyep.onrender.com");
+  useEffect(() => {
+    const awakeBackend = async () => {
+      try {
+        const res = await axios.get("https://authx-backend-yyep.onrender.com");
         console.log(res.data);
-      }catch(err){
-        console.log(err);
+      } catch (err) {
+        if (err.response) {
+          alert(err.response.data.message || "Invalid email or passowrd");
+        } else {
+          alert("Server Went Down");
+        }
       }
     }
     awakeBackend();
-  } , []);
+  }, []);
 
-  const [userData, setUserData] = useState({}); 
-  const [name , setName] = useState("");
-  const [password , setPassword] = useState("");
-  const [email , setEmail] = useState("");
-  const [age , setAge] = useState(0); 
-  const [otp , setOtp] = useState("");
+  const [userData, setUserData] = useState({});
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState(0);
+  const [otp, setOtp] = useState("");
 
   return (
-    <>  
+    <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<SignUp 
-            setName={setName} name = {name}
-            setPassword={setPassword} password = {password}
-            setEmail = {setEmail} 
-            setAge = {setAge} age = {age}
+          <Route path='/' element={<SignUp
+            setName={setName} name={name}
+            setPassword={setPassword} password={password}
+            setEmail={setEmail}
+            setAge={setAge} age={age}
             email={email}
-          />} 
+          />}
           />
           <Route path="/login" element={<LogIn setUserData={setUserData}
-            setName={setName} 
+            setName={setName}
             setPassword={setPassword}
-            setEmail = {setEmail}
-            setAge = {setAge}
-          />}/>
-          <Route path="/otp-verification" element={<OtpVer 
-            name = {name}
-            age = {age}
-            password ={password}
-            email = {email}
-            setUserData = {setUserData}
+            setEmail={setEmail}
+            setAge={setAge}
           />} />
-          <Route path="/forget-password" element={<ForgetPassword 
+          <Route path="/otp-verification" element={<OtpVer
+            name={name}
+            age={age}
+            password={password}
+            email={email}
+            setUserData={setUserData}
+          />} />
+          <Route path="/forget-password" element={<ForgetPassword
             email={email}
             setEmail={setEmail}
-            />}/>
-          <Route path="/reset-password" element={<ResetPassword 
+          />} />
+          <Route path="/reset-password" element={<ResetPassword
             password={password}
             setPassword={setPassword}
-            setUserData = {setUserData}
+            setUserData={setUserData}
             otp={otp}
-          />}/>
-          <Route path="/profile" element={<ProfilePage userData={userData} />}/>
-          <Route path="/reset-otp" element={<ResetOtp 
+          />} />
+          <Route path="/profile" element={<ProfilePage userData={userData} />} />
+          <Route path="/reset-otp" element={<ResetOtp
             email={email}
             otp={otp}
             setOtp={setOtp}

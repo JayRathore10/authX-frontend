@@ -3,49 +3,53 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import "./ResetPassword.css";
 
-export function ResetPassword({password, setPassword , otp , setUserData}){
-  const [confirmPass , setConfirmPass] = useState("");
+export function ResetPassword({ password, setPassword, otp, setUserData }) {
+  const [confirmPass, setConfirmPass] = useState("");
 
   const navigate = useNavigate();
 
-  const submitHandler = async(e)=>{
-    try{  
+  const submitHandler = async (e) => {
+    try {
       e.preventDefault();
-      if(password !== confirmPass){
+      if (password !== confirmPass) {
         console.error("Password not match");
-        return ;
+        return;
       }
       const response = await axios.post(`https://authx-backend-yyep.onrender.com/api/auth/reset-password/${otp}`, {
-        password : password
+        password: password
       });
 
-      if(response.status === 200){
+      if (response.status === 200) {
         setUserData(response.data.userData);
         navigate("/profile");
-      }else{
+      } else {
         alert("Something Went Wrong");
       }
-    }catch(err){
-      console.log(err);
+    } catch (err) {
+      if (err.response) {
+        alert(err.response.data.message || "Invalid email or passowrd");
+      } else {
+        alert("Server Went Down");
+      }
     }
   }
 
   return (
     <>
-    <div className="reset-container">
-      <h2>Reset Password</h2>
-      <form className="reset-form">
-        <input type="password" placeholder="New Password" 
-          onChange={(e)=>setPassword(e.target.value)}
-        />
-        <input type="password" placeholder="Confirm Password"
-          onChange={(e)=>setConfirmPass(e.target.value)}
-        />
-        <button type="submit"
-          onClick={submitHandler}
-        >Reset Password</button>
-      </form>
-    </div>
+      <div className="reset-container">
+        <h2>Reset Password</h2>
+        <form className="reset-form">
+          <input type="password" placeholder="New Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <input type="password" placeholder="Confirm Password"
+            onChange={(e) => setConfirmPass(e.target.value)}
+          />
+          <button type="submit"
+            onClick={submitHandler}
+          >Reset Password</button>
+        </form>
+      </div>
     </>
   );
 };

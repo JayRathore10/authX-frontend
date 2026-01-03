@@ -3,51 +3,54 @@ import { useNavigate } from "react-router-dom";
 import "./LogIn.css";
 import axios from 'axios';
 
-export function LogIn({setUserData}){
+export function LogIn({ setUserData }) {
   const navigate = useNavigate();
 
-  const[email , setEmail] = useState("");
-  const[password , setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const submitHandler = async(e)=>{
-    try{
+  const submitHandler = async (e) => {
+    try {
       e.preventDefault();
-      const response = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/login" ,{
-        email , 
-        password 
-      } , {withCredentials : true });
+      const response = await axios.post("https://authx-backend-yyep.onrender.com/api/auth/login", {
+        email,
+        password
+      }, { withCredentials: true });
 
-      if(response.status === 200){
+      if (response.status === 200) {
         setUserData(response.data.user);
         navigate("/profile");
-      }else{
+      } else {
         alert("Something went wrong");
       }
-    }catch(err){
-      console.log(err);
-    } 
+    } catch (err) {
+      if (err.response) {
+        alert(err.response.data.message || "Invalid email or passowrd");
+      } else {
+        alert("Server Went Down");
+      }
+    }
   }
 
   return (
     <>
-    <div className="login-container">
-      <h2>Login</h2>
-      <form className="login-form">
-        <input type="email" placeholder="Email" 
-          onChange={(e)=>setEmail(e.target.value)}
-        />
-        <input type="password" placeholder="Password" 
-          onChange={(e)=>setPassword(e.target.value)}
-        />
-        <button type="submit" 
-          onClick={submitHandler}
-        >Login</button>
-      </form>
-      <p className="login-link">
-        <a href="/forget-password">Forgot Password?</a>
-      </p>
-    </div>
+      <div className="login-container">
+        <h2>Login</h2>
+        <form className="login-form">
+          <input type="email" placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input type="password" placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="submit"
+            onClick={submitHandler}
+          >Login</button>
+        </form>
+        <p className="login-link">
+          <a href="/forget-password">Forgot Password?</a>
+        </p>
+      </div>
     </>
   );
 };
-  

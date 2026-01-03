@@ -19,7 +19,11 @@ export function ForgetPassword({ setEmail, email }) {
         alert("Someting went Wrong Try again");
       }
     } catch (err) {
-      console.log(err);
+      if (err.response) {
+        alert(err.response.data.message || "Invalid email or passowrd");
+      } else {
+        alert("Server Went Down");
+      }
     }
   }
 
